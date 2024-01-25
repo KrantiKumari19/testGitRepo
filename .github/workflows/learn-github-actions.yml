@@ -7,14 +7,7 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   build:
-    name: Lint
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      packages: read
-      # To report GitHub Actions status checks
-      statuses: write
 
     steps:
       - name: Checkout code
@@ -30,4 +23,17 @@ jobs:
           DEFAULT_BRANCH: main
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Super-linter
+        uses: super-linter/super-linter@v5.7.2  # x-release-please-version
+        env:
+          DEFAULT_BRANCH: main
+          # To report GitHub Actions status checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
 ...
